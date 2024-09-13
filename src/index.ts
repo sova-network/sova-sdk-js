@@ -1,3 +1,3 @@
-import {AuthService} from './services/authentication/authentication.service'; 
+import {AuthGrpcService} from './services/grpc/authentication/authentication.grpc.service'; 
 
-new AuthService();
+new AuthGrpcService();

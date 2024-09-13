@@ -1,13 +1,14 @@
 import * as grpc from '@grpc/grpc-js';
 import * as protoLoader from '@grpc/proto-loader';
-import type { ProtoGrpcType } from '../../proto/auth';
-import { AuthServiceClient } from '../../proto/auth/AuthService';
+import type { ProtoGrpcType } from '../../../proto/auth';
+import { AuthServiceClient } from '../../../proto/auth/AuthService';
 import {promisify} from 'node:util';
-import { GenerateAuthChallengeRequest } from '../../proto/auth/GenerateAuthChallengeRequest';
-import { GenerateAuthTokensRequest } from '../../proto/auth/GenerateAuthTokensRequest';
-import { RefreshAccessTokenRequest } from '../../proto/auth/RefreshAccessTokenRequest';
-import { GenerateAuthChallengeResponse } from '../../proto/auth/GenerateAuthChallengeResponse';
-import { GenerateAuthTokensResponse } from '../../proto/auth/GenerateAuthTokensResponse';
+import { GenerateAuthChallengeRequest } from '../../../proto/auth/GenerateAuthChallengeRequest';
+import { GenerateAuthTokensRequest } from '../../../proto/auth/GenerateAuthTokensRequest';
+import { RefreshAccessTokenRequest } from '../../../proto/auth/RefreshAccessTokenRequest';
+import { GenerateAuthChallengeResponse } from '../../../proto/auth/GenerateAuthChallengeResponse';
+import { GenerateAuthTokensResponse } from '../../../proto/auth/GenerateAuthTokensResponse';
+import { Token } from '../../../proto/auth/Token';
 const packageDefinition = protoLoader.loadSync('./mevton-grpc-proto/proto/auth.proto',{
   keepCase: true,
   longs: String,
@@ -21,12 +22,14 @@ const proto = (grpc.loadPackageDefinition(
 
 const pkg = proto.auth;
 
-export class AuthService {
+export class AuthGrpcService {
   private client: AuthServiceClient;
   
-  constructor() {
+  constructor(
+    url: string
+  ) {
     this.client = new pkg.AuthService(
-      'localhost:50051',
+      url,
       grpc.credentials.createInsecure()
     );
   }
@@ -49,11 +52,11 @@ export class AuthService {
     return r;
   }
 
-  public refreshAccessToken(refreshToken: string): Promise<GenerateAuthTokensResponse| undefined> {
+  public refreshAccessToken(refreshToken: Token): Promise<GenerateAuthTokensResponse| undefined> {
     const request: RefreshAccessTokenRequest = {
-      refreshToken: refreshToken
+      refreshToken: refreshToken.value
     }
-    return promisify(this.client.RefreshAccessToken.bind(this.client, {refreshToken: refreshToken}))()
+    return promisify(this.client.RefreshAccessToken.bind(this.client, request))()
   }
 
 } 

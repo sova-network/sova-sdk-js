@@ -1,10 +1,10 @@
 import * as grpc from '@grpc/grpc-js';
 import * as protoLoader from '@grpc/proto-loader';
-import type { ProtoGrpcType } from '../../proto/block_engine';
-import { BlockEngineValidatorClient } from '../../proto/block_engine/BlockEngineValidator';
-import {promisify} from 'node:util';
-import { MempoolPacket } from '../../proto/dto/MempoolPacket';
-import { Bundle__Output } from '../../proto/dto/Bundle';
+import type { ProtoGrpcType } from '../../../proto/block_engine';
+import { BlockEngineValidatorClient } from '../../../proto/block_engine/BlockEngineValidator';
+import { MempoolPacket } from '../../../proto/dto/MempoolPacket';
+import { Bundle__Output } from '../../../proto/dto/Bundle';
+
 const packageDefinition = protoLoader.loadSync('./mevton-grpc-proto/proto/auth.proto',{
   keepCase: true,
   longs: String,
@@ -18,14 +18,32 @@ const proto = (grpc.loadPackageDefinition(
 
 const pkg = proto.block_engine;
 
-export class AuthService {
+export class BlockEngineGrpcService {
   private client: BlockEngineValidatorClient;
-  
-  constructor() {
-    this.client = new pkg.BlockEngineValidator(
-      'localhost:50051',
-      grpc.credentials.createInsecure()
-    )
+  private accessToken: string | undefined;
+  private url: string;
+
+  constructor(
+    url: string,
+    accessToken?: string,
+  ) {
+    this.url = url;
+    this.accessToken = accessToken;
+
+    this.client = this.getClient();
+  }
+
+
+  getClient() {
+    const metadata = new grpc.Metadata();
+    if (this.accessToken){
+      metadata.add('authorization', `Bearer ${this.accessToken}`);
+    }
+    return new pkg.BlockEngineValidator(
+      this.url,
+      grpc.credentials.createInsecure(),
+      { metadata }
+    );
   }
 
   streamMempool(metadata: grpc.Metadata, options: grpc.CallOptions, callback: grpc.requestCallback<any>): grpc.ClientWritableStream<MempoolPacket> {
