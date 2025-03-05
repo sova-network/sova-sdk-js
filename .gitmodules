@@ -1,0 +1,3 @@
+[submodule "sova-grpc-proto"]
+	path = sova-grpc-proto
+	url = https://github.com/sova-network/sova-grpc-proto.git

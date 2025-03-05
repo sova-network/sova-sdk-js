@@ -1,4 +1,4 @@
-// Original file: mevton-grpc-proto/proto/searcher.proto
+// Original file: sova-grpc-proto/proto/searcher.proto
 
 import type { BundleResultAuctionWin as _searcher_BundleResultAuctionWin, BundleResultAuctionWin__Output as _searcher_BundleResultAuctionWin__Output } from '../searcher/BundleResultAuctionWin';
 import type { BundleResultAuctionLoose as _searcher_BundleResultAuctionLoose, BundleResultAuctionLoose__Output as _searcher_BundleResultAuctionLoose__Output } from '../searcher/BundleResultAuctionLoose';

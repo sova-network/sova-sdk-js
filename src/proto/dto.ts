@@ -12,6 +12,7 @@ export interface ProtoGrpcType {
     ExternalMessage: MessageTypeDefinition
     MempoolExternalMessage: MessageTypeDefinition
     MempoolPacket: MessageTypeDefinition
+    ValidatorBundle: MessageTypeDefinition
   }
   google: {
     protobuf: {

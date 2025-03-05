@@ -1,4 +1,4 @@
-// Original file: mevton-grpc-proto/proto/auth.proto
+// Original file: sova-grpc-proto/proto/auth.proto
 
 import type { Token as _auth_Token, Token__Output as _auth_Token__Output } from '../auth/Token';
 

@@ -13,6 +13,7 @@ export interface ProtoGrpcType {
     ExternalMessage: MessageTypeDefinition
     MempoolExternalMessage: MessageTypeDefinition
     MempoolPacket: MessageTypeDefinition
+    ValidatorBundle: MessageTypeDefinition
   }
   google: {
     protobuf: {
@@ -30,12 +31,16 @@ export interface ProtoGrpcType {
     BundleResultInterrupted: MessageTypeDefinition
     BundleResultPartiallyExpired: MessageTypeDefinition
     BundleResultPartiallyProcessed: MessageTypeDefinition
+    ExternalOutMessageBodyOpcodeSubscriptionV0: MessageTypeDefinition
     GetTipAddressesRequest: MessageTypeDefinition
     GetTipAddressesResponse: MessageTypeDefinition
+    InternalMessageBodyOpcodeSubscriptionV0: MessageTypeDefinition
     MempoolSubscription: MessageTypeDefinition
     SearcherService: SubtypeConstructor<typeof grpc.Client, _searcher_SearcherServiceClient> & { service: _searcher_SearcherServiceDefinition }
     SendBundleResponse: MessageTypeDefinition
     SubscribeBundleResultsRequest: MessageTypeDefinition
+    WorkchainShardSubscriptionV0: MessageTypeDefinition
+    WorkchainSubscriptionV0: MessageTypeDefinition
   }
 }
 

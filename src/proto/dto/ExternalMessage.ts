@@ -1,4 +1,4 @@
-// Original file: mevton-grpc-proto/proto/dto.proto
+// Original file: sova-grpc-proto/proto/dto.proto
 
 
 export interface ExternalMessage {

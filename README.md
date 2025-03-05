@@ -1,12 +1,10 @@
-# prerequisites
+# Prerequisites
 
 - NodeJs
 
 # Getting started
 
-
-
-install grpc tools globally in your machine
+Install grpc tools globally in your machine
 
 ```sh
 npm install -g grpc-tools

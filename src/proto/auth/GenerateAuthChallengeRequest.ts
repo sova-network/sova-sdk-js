@@ -1,4 +1,4 @@
-// Original file: mevton-grpc-proto/proto/auth.proto
+// Original file: sova-grpc-proto/proto/auth.proto
 
 
 export interface GenerateAuthChallengeRequest {

@@ -1,4 +1,4 @@
-// Original file: mevton-grpc-proto/proto/auth.proto
+// Original file: sova-grpc-proto/proto/auth.proto
 
 import type { Timestamp as _google_protobuf_Timestamp, Timestamp__Output as _google_protobuf_Timestamp__Output } from '../google/protobuf/Timestamp';
 

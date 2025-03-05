@@ -1,4 +1,4 @@
-// Original file: mevton-grpc-proto/proto/dto.proto
+// Original file: sova-grpc-proto/proto/dto.proto
 
 import type { Long } from '@grpc/proto-loader';
 

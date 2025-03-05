@@ -1,4 +1,4 @@
-// Original file: mevton-grpc-proto/proto/searcher.proto
+// Original file: sova-grpc-proto/proto/searcher.proto
 
 import type { BundleResultPartiallyProcessed as _searcher_BundleResultPartiallyProcessed, BundleResultPartiallyProcessed__Output as _searcher_BundleResultPartiallyProcessed__Output } from '../searcher/BundleResultPartiallyProcessed';
 import type { BundleResultPartiallyExpired as _searcher_BundleResultPartiallyExpired, BundleResultPartiallyExpired__Output as _searcher_BundleResultPartiallyExpired__Output } from '../searcher/BundleResultPartiallyExpired';

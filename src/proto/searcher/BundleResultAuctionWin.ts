@@ -1,4 +1,4 @@
-// Original file: mevton-grpc-proto/proto/searcher.proto
+// Original file: sova-grpc-proto/proto/searcher.proto
 
 import type { Long } from '@grpc/proto-loader';
 
