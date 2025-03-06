@@ -31,7 +31,7 @@ export class SovaClient {
 
 export function getTestnetClient(authToken?: any) {
     return new SovaClient(
-        "https://testnet-engine.sova.finance:30010",
+        "https://testnet-engine.sova.network:30010",
         Buffer.from(TESTNET_CA_PEM, "utf8"),
         authToken
     );
