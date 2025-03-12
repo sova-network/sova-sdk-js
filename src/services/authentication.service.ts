@@ -1,3 +1,4 @@
+import path from "node:path";
 import * as grpc from '@grpc/grpc-js';
 import * as protoLoader from '@grpc/proto-loader';
 import type { ProtoGrpcType } from '../proto/auth';
@@ -9,7 +10,10 @@ import { RefreshAccessTokenRequest } from '../proto/auth/RefreshAccessTokenReque
 import { GenerateAuthTokensResponse } from '../proto/auth/GenerateAuthTokensResponse';
 import {Token__Output} from '../proto/auth/Token';
 import {ChannelCredentials} from "@grpc/grpc-js";
-const packageDefinition = protoLoader.loadSync('./sova-grpc-proto/proto/auth.proto',{
+
+const protoPath = path.join(__dirname, '..', 'sova-grpc-proto', 'proto', 'auth.proto');
+
+const packageDefinition = protoLoader.loadSync(protoPath, {
   keepCase: true,
   longs: String,
   enums: String,
@@ -34,11 +38,11 @@ export class AuthenticationService {
   constructor(
       url: string,
       privateKey: Buffer,
-      caPEM?: Buffer,
+      secureConnection?: boolean,
   ) {
     this.client = new pkg.AuthService(
         url,
-        caPEM ? ChannelCredentials.createSsl(caPEM) : grpc.credentials.createInsecure(),
+        secureConnection ? ChannelCredentials.createSsl() : grpc.credentials.createInsecure(),
     );
     this.privateKey = privateKey;
   }

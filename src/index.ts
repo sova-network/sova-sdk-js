@@ -1,11 +1,10 @@
 import {AuthenticationService, SearcherService} from "./services";
 import {GenerateAuthTokensResponse} from "./proto/auth/GenerateAuthTokensResponse";
-import {TESTNET_CA_PEM} from "./services/pem";
 
 export class SovaClient {
     constructor(
         protected url: string,
-        protected caPEM?: Buffer,
+        protected secureConnection: boolean,
         protected authToken?: GenerateAuthTokensResponse
     ) {
     }
@@ -14,7 +13,7 @@ export class SovaClient {
         const authenticationService = new AuthenticationService(
             this.url,
             privateKey,
-            this.caPEM,
+            this.secureConnection,
         );
 
         this.authToken = await authenticationService.authenticate();
@@ -23,7 +22,7 @@ export class SovaClient {
     getSearcher() {
         return new SearcherService(
             this.url,
-            this.caPEM,
+            this.secureConnection,
             this.authToken?.accessToken || undefined
         );
     }
@@ -31,8 +30,8 @@ export class SovaClient {
 
 export function getTestnetClient(authToken?: any) {
     return new SovaClient(
-        "https://testnet-engine.sova.network:30010",
-        Buffer.from(TESTNET_CA_PEM, "utf8"),
+        "testnet-engine.sova.network:30020",
+        true,
         authToken
     );
 }

@@ -1,7 +1,7 @@
 {
-  "name": "sova-sdk-js",
-  "version": "1.0.0",
-  "description": "",
+  "name": "@sova-labs/sdk",
+  "version": "0.1.7",
+  "description": "Sova MEV Searcher SDK for TON",
   "main": "dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/index.d.ts",
@@ -14,10 +14,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "build:protobuf": "proto-loader-gen-types --longs=String --enums=String --defaults --oneofs --grpcLib=@grpc/grpc-js --outDir=src/proto/ sova-grpc-proto/proto/*.proto --includeDirs=./sova-grpc-proto/proto --includeDirs=./",
     "build:cjs": "tsc --project tsconfig.cjs.json",
     "build:esm": "tsc --project tsconfig.esm.json",
-    "build": "npm run build:cjs && npm run build:esm"
-
+    "clean": "rm -Rf dist",
+    "prepublish": "npm run clean && npm run build",
+    "build": "npm run build:protobuf && npm run build:cjs && npm run build:esm && cp -R sova-grpc-proto dist/cjs && cp -R sova-grpc-proto dist/esm"
   },
   "repository": {
     "type": "git",
@@ -38,10 +40,13 @@
   "dependencies": {
     "@grpc/grpc-js": "^1.11.2",
     "@grpc/proto-loader": "^0.7.13",
-    "@noble/curves": "^1.8.1",
-    "typescript": "^5.8.2"
+    "@noble/curves": "^1.8.1"
   },
   "devDependencies": {
+    "typescript": "^5.8.2",
     "ts-node-dev": "^2.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

@@ -1,4 +1,4 @@
-//SearcherService
+import path from "node:path";
 import * as grpc from '@grpc/grpc-js';
 import * as protoLoader from '@grpc/proto-loader';
 import type { ProtoGrpcType } from '../proto/searcher';
@@ -9,11 +9,13 @@ import {ChannelCredentials} from "@grpc/grpc-js";
 import {Token} from "../proto/auth/Token";
 import {GetTipAddressesRequest} from "../proto/searcher/GetTipAddressesRequest";
 import type {MempoolSubscription as _searcher_MempoolSubscription} from "../proto/searcher/MempoolSubscription";
-const packageDefinition = protoLoader.loadSync('./sova-grpc-proto/proto/auth.proto', {
+
+const protoPath = path.join(__dirname, '..', 'sova-grpc-proto', 'proto', 'searcher.proto');
+
+const packageDefinition = protoLoader.loadSync(protoPath, {
   keepCase: true,
   longs: String,
   enums: String,
-  defaults: true,
   oneofs: true,
 });
 const proto = (grpc.loadPackageDefinition(
@@ -29,7 +31,7 @@ export class SearcherService {
 
   constructor(
     url: string,
-    caPEM?: Buffer,
+    secureConnection?: boolean,
     accessToken?: Token,
   ) {
     this.accessToken = accessToken;
@@ -42,7 +44,7 @@ export class SearcherService {
 
     this.client = new pkg.SearcherService(
         url,
-        caPEM ? ChannelCredentials.createSsl(caPEM) : grpc.credentials.createInsecure(),
+        secureConnection ? ChannelCredentials.createSsl() : grpc.credentials.createInsecure(),
         { metadata }
     );
   }
