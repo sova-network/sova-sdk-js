@@ -94,15 +94,17 @@ export class SearcherService {
     });
   }
 
-  public subscribeByExternalOutMessageOpcode(opcode: number) {
+  public subscribeByExternalOutMessageOpcode(workchainId: number, shard: Buffer, opcode: number) {
     return this.subscribeMempool({
       externalOutMessageBodyOpcode: {
+        workchainId,
+        shard,
         opcode
       }
     });
   }
 
-  public subscribeByInternalMessageOpcode(opcode: number) {
+  public subscribeByInternalMessageOpcode(workchainId: number, shard: Buffer, opcode: number) {
     return this.subscribeMempool({
       internalMessageBodyOpcode: {
         opcode

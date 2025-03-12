@@ -1,32 +1,30 @@
-# Prerequisites
+# Sova SDK
 
-- NodeJs
+Sova SDK is a JavaScript/TypeScript library for interacting with the Sova MEV Engine and Searcher services. It provides functionalities for authentication, streaming mempool transactions, subscribing to bundles, and sending bundles.
 
-# Getting started
+- **Authentication**: Authenticate using your private key to obtain access and refresh tokens.
+- **Streaming Mempool Transactions**: Stream transactions from the client to the Sova MEV Engine.
+- **Subscribe to Bundles**: Subscribe to receive a stream of simulated and profitable bundles.
+- **Send Bundles**: Send bundles to the Sova MEV Engine for processing.
 
-Install grpc tools globally in your machine
+## Installation
+Install the package via npm:
 
-```sh
-npm install -g grpc-tools
-```
+`npm install @sova-labs/sdk`
 
-# generating proto.
-<!-- 
-```sh
-grpc_tools_node_protoc --js_out=import_style=commonjs,binary:../../src/proto/ --grpc_out=../../src/proto --plugin=protoc-gen-grpc=`which grpc_tools_node_protoc_plugin` ./auth.proto
-grpc_tools_node_protoc --js_out=import_style=commonjs,binary:../../src/proto/ --grpc_out=../../src/proto --plugin=protoc-gen-grpc=`which grpc_tools_node_protoc_plugin` ./block_engine.proto
-grpc_tools_node_protoc --js_out=import_style=commonjs,binary:../../src/proto/ --grpc_out=../../src/proto --plugin=protoc-gen-grpc=`which grpc_tools_node_protoc_plugin` ./dto.proto
-grpc_tools_node_protoc --js_out=import_style=commonjs,binary:../../src/proto/ --grpc_out=../../src/proto --plugin=protoc-gen-grpc=`which grpc_tools_node_protoc_plugin` ./searcher.proto
-``` -->
+Or using yarn:
 
-```bash
-# after install dependencies
-npx proto-loader-gen-types \
-  --longs=String \
-  --enums=String \
-  --defaults \
-  --oneofs \
-  --grpcLib=@grpc/grpc-js \
-  --outDir=src/proto/ mevton-grpc-proto/proto/*.proto \
-  --includeDirs 
-```
+`yarn add @sova-labs/sdk`
+
+## Usage Guide
+https://sova-network.gitbook.io/sova-labs/mev-searcher-guide/javascript-sdk
+
+## Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request with any changes or enhancements. Follow these steps to contribute:
+
+1. Fork the repository.
+2. Create a new branch for your feature or bugfix.
+3. Make your changes and commit them with clear and descriptive messages.
+4. Push your changes to your fork.
+5. Open a pull request to the main repository.
