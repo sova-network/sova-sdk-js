@@ -13,7 +13,7 @@ import type {MempoolSubscription as _searcher_MempoolSubscription} from "../prot
 const protoPath = path.join(__dirname, '..', 'sova-grpc-proto', 'proto', 'searcher.proto');
 
 const packageDefinition = protoLoader.loadSync(protoPath, {
-  keepCase: true,
+  keepCase: false,
   longs: String,
   enums: String,
   oneofs: true,

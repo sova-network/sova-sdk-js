@@ -14,7 +14,7 @@ import {ChannelCredentials} from "@grpc/grpc-js";
 const protoPath = path.join(__dirname, '..', 'sova-grpc-proto', 'proto', 'auth.proto');
 
 const packageDefinition = protoLoader.loadSync(protoPath, {
-  keepCase: true,
+  keepCase: false,
   longs: String,
   enums: String,
   defaults: true,
