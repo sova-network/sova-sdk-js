@@ -1,5 +1,6 @@
 // Original file: sova-grpc-proto/proto/dto.proto
 
+import type { MempoolOutMessage as _dto_MempoolOutMessage, MempoolOutMessage__Output as _dto_MempoolOutMessage__Output } from '../dto/MempoolOutMessage';
 import type { Long } from '@grpc/proto-loader';
 
 export interface MempoolExternalMessage {
@@ -10,6 +11,7 @@ export interface MempoolExternalMessage {
   'stdSmcAddress'?: (Buffer | Uint8Array | string);
   'gasSpent'?: (number | string | Long);
   'outMsgs'?: (Buffer | Uint8Array | string)[];
+  'parsedOutMsgs'?: (_dto_MempoolOutMessage)[];
 }
 
 export interface MempoolExternalMessage__Output {
@@ -20,4 +22,5 @@ export interface MempoolExternalMessage__Output {
   'stdSmcAddress': (Buffer);
   'gasSpent': (string);
   'outMsgs': (Buffer)[];
+  'parsedOutMsgs': (_dto_MempoolOutMessage__Output)[];
 }

@@ -11,6 +11,9 @@ export interface ProtoGrpcType {
     Bundle: MessageTypeDefinition
     ExternalMessage: MessageTypeDefinition
     MempoolExternalMessage: MessageTypeDefinition
+    MempoolOutExternalOutMessage: MessageTypeDefinition
+    MempoolOutInternalMessage: MessageTypeDefinition
+    MempoolOutMessage: MessageTypeDefinition
     MempoolPacket: MessageTypeDefinition
     ValidatorBundle: MessageTypeDefinition
   }

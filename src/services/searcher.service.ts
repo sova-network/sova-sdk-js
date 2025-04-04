@@ -9,6 +9,8 @@ import {ChannelCredentials} from "@grpc/grpc-js";
 import {Token} from "../proto/auth/Token";
 import {GetTipAddressesRequest} from "../proto/searcher/GetTipAddressesRequest";
 import type {MempoolSubscription as _searcher_MempoolSubscription} from "../proto/searcher/MempoolSubscription";
+import type {ExternalMessage as _dto_ExternalMessage} from "../proto/dto/ExternalMessage";
+import type {Timestamp as _google_protobuf_Timestamp} from "../proto/google/protobuf/Timestamp";
 
 const protoPath = path.join(__dirname, '..', 'sova-grpc-proto', 'proto', 'searcher.proto');
 
@@ -54,10 +56,22 @@ export class SearcherService {
     });
   }
 
-  public sendBundle(messages: { data: Buffer }[]) {
-    const request: Bundle = {
-      message: messages
+  public sendBundle(messages: Array<_dto_ExternalMessage>, expireAt?: Date) {
+    let expirationNs: _google_protobuf_Timestamp | null | undefined = undefined;
+
+    if (expireAt) {
+      const milliseconds = expireAt.getTime();
+      expirationNs = {
+        seconds: Math.floor(milliseconds / 1000),
+        nanos: (milliseconds % 1000) * 1e6
+      };
     }
+
+    const request: Bundle = {
+      message: messages,
+      expirationNs,
+    }
+
     return promisify(this.client.SendBundle.bind(this.client, request))()
   }
 
