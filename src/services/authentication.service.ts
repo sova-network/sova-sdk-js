@@ -85,4 +85,4 @@ export class AuthenticationService {
     }
     return promisify(this.client.RefreshAccessToken.bind(this.client, request))()
   }
-} 
+}

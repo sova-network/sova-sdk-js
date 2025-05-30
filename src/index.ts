@@ -28,7 +28,7 @@ export class SovaClient {
     }
 }
 
-export function getTestnetClient(authToken?: any) {
+export function getTestnetClient(authToken?: GenerateAuthTokensResponse) {
     return new SovaClient(
         "testnet-engine.sova.network:30020",
         true,
@@ -36,6 +36,10 @@ export function getTestnetClient(authToken?: any) {
     );
 }
 
-export function getMainnetClient() {
-    throw new Error('Not implemented');
+export function getMainnetClient(authToken?: GenerateAuthTokensResponse) {
+    return new SovaClient(
+        "engine.sova.network:30020",
+        true,
+        authToken
+    );
 }
