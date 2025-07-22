@@ -19,6 +19,7 @@ const packageDefinition = protoLoader.loadSync(protoPath, {
   longs: String,
   enums: String,
   oneofs: true,
+  defaults: true,
 });
 const proto = (grpc.loadPackageDefinition(
   packageDefinition
